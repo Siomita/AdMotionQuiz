@@ -137,21 +137,6 @@ body{display:flex;flex-direction:column;align-items:center;}
 .diag-reviewer{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;}
 
 /* OPTIN */
-.optin-screen{padding:32px 0 48px;}
-.optin-eyebrow{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
-.optin-headline{font-family:var(--font);font-weight:700;font-size:clamp(20px,5vw,26px);line-height:1.2;letter-spacing:-.4px;margin-bottom:10px;color:var(--black);}
-.optin-body{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:24px;}
-.optin-img-wrap{margin:0 0 20px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);}
-.optin-img-wrap img{width:100%;display:block;}
-.optin-fields{display:flex;flex-direction:column;gap:10px;margin-bottom:12px;}
-.optin-input{width:100%;padding:13px 15px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:var(--font);font-size:14px;color:var(--black);background:var(--white);outline:none;transition:border-color .15s;}
-.optin-input:focus{border-color:rgba(13,13,13,.4);}
-.optin-input::placeholder{color:var(--muted);}
-.optin-btn{width:100%;padding:14px;border-radius:100px;font-family:var(--font);font-weight:700;font-size:15px;cursor:pointer;border:none;background:var(--accent);color:#fff;letter-spacing:.02em;transition:transform .15s,opacity .2s;}
-.optin-btn:hover{transform:scale(1.01);}
-.optin-btn:disabled{opacity:.35;cursor:default;transform:none;}
-.optin-small{font-size:12px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.6;}
-.optin-error{font-size:13px;color:#b91c1c;text-align:center;margin-top:8px;display:none;}
 
 /* RESULT */
 .result-screen{padding-bottom:48px;}
@@ -222,8 +207,8 @@ let sopScore = 0;
 window._giftTimer = null;
 window._giftSecsLeft = null;
 
-const COURSE_LP = 'https://admotion.co?ref=quiz';
-const SOP_LP = 'https://claymotion-sop.vercel.app/';
+const COURSE_LP = 'https://docs.google.com/document/d/1FHNqWbogny7LJ1Y_rvYPw7lJH0FsdsmekE-EuaTyzhA/edit?usp=sharing';
+const SOP_LP = 'https://docs.google.com/document/d/17e9TyNZIqvrzD1cGB6fYN49lN1i2EdjCUan5fjtWAUI/edit?usp=sharing';
 
 const SCREENS = ['gift','hook','q2','q3','q4','q5','q6','fact','q7','q8','q9','q10','interrupt','q11','q12','loader','diagnosis'];
 let currentIndex = 0;
@@ -244,7 +229,7 @@ function updateProgress(screen){
   const fill = document.getElementById('progress-fill');
   const label = document.getElementById('progress-label');
   const header = document.getElementById('quiz-header');
-  if(screen==='optin'||screen==='diagnosis'||screen==='gift'){
+  if(screen==='diagnosis'||screen==='gift'){
     header.style.display='none';
   } else if(n>0){
     header.style.display='';
@@ -735,7 +720,6 @@ function renderLoader(el){
 }
 
 
-
 function renderDiagnosis(el){
   const route=getRoute();
   const destUrl=route==='sop'?SOP_LP:COURSE_LP;
@@ -747,9 +731,12 @@ function renderDiagnosis(el){
       <div class="diag-headline">The scroll stops for one reason. You're about to find out what it is.</div>
       <div class="diag-subline">In the next few minutes you're going to see an ad format you probably haven't tried — and immediately understand why it works. Most people watch it twice.</div>
       <div class="diag-video-wrap">
-        <iframe src="https://player.vimeo.com/video/1194196212?badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" allowfullscreen title="AdMotion VSL"></iframe>
+        <div class="diag-video-placeholder" id="diag-play-wrap">
+          <div class="diag-play-btn"><div class="diag-play-icon"></div></div>
+          <div class="diag-video-label">Watch the C.L.A.Y. method</div>
+        </div>
       </div>
-      <button class="btn-diag" onclick="window.location.href='${destUrl}'">${ctaBtn}</button>
+      <button class="btn-diag" onclick="window.open('${destUrl}', '_blank')">${ctaBtn}</button>
       <div class="diag-small">Free to watch. No credit card.</div>
       <div class="diag-social">
         <div class="diag-social-label">What others are saying</div>
